@@ -1,0 +1,58 @@
+{
+  "name": "react-workshop-hydration",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/core": "^7.18.0",
+    "@babel/preset-env": "^7.18.0",
+    "@babel/preset-react": "^7.17.12",
+    "@babel/register": "^7.17.7",
+    "@date-io/date-fns": "^2.14.0",
+    "@emotion/react": "^11.9.0",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.8.0",
+    "@mui/material": "^5.8.0",
+    "@reduxjs/toolkit": "^1.8.1",
+    "babel-plugin-transform-assets": "^1.0.2",
+    "date-fns": "^2.28.0",
+    "jabber": "^1.4.0",
+    "lodash": "^4.17.21",
+    "nanoid": "^3.3.4",
+    "prop-types": "^15.8.1",
+    "react": "^18.1.0",
+    "react-app-rewired": "^2.2.1",
+    "react-dom": "^18.1.0",
+    "react-markdown": "^6.0.3",
+    "react-redux": "^8.0.2",
+    "react-scripts": "^5.0.1",
+    "remark-gfm": "^1.0.0"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "serve-without-ssr": "node -r ./server/babel-register.js ./server/index.js",
+    "serve": "ENABLE_SSR=true node -r ./server/babel-register.js ./server/index.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "packageManager": "yarn@3.2.1"
+}
