@@ -1,7 +1,7 @@
 import { formatISO } from "date-fns";
 import Jabber from "jabber";
 import { nanoid } from "nanoid";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteNotes, getNotes, putNote } from "../../utils/storage";
 import { updateLastActiveDate } from "../../store/redux/userReducer";

@@ -1,8 +1,40 @@
-import { useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { Button, ButtonGroup } from "@mui/material";
 import FilterInput from "../FilterInput";
 import NoteButton from "../NoteButton";
 import "./index.css";
+
+const NoteButtonIntermediate = memo(function NoteButtonIntermediate({
+  id,
+  onNoteActivated,
+  activeNoteId,
+  text,
+  filter,
+  date,
+}) {
+  const onNoteActivatedCb = useCallback(
+    () => onNoteActivated(id),
+    [onNoteActivated, id]
+  );
+  // const ref = useRef()
+  // ref.current =
+  // Regenerating:
+  // prevOnNoteActivated !== nextOnNoteActivated
+  // useCallback:
+  // prevOnNoteActivated === nextOnNoteActivated
+
+  return (
+    <NoteButton
+      isActive={activeNoteId === id}
+      // id={id}
+      // onNoteActivated={onNoteActivated}
+      onNoteActivated={onNoteActivatedCb}
+      text={text}
+      filterText={filter}
+      date={date}
+    />
+  );
+});
 
 function NotesList({
   notes,
@@ -33,16 +65,19 @@ function NotesList({
 
             return text.toLowerCase().includes(filter.toLowerCase());
           })
-          .map(({ id, text, date }) => (
-            <NoteButton
-              key={id}
-              isActive={activeNoteId === id}
-              onNoteActivated={() => onNoteActivated(id)}
-              text={text}
-              filterText={filter}
-              date={date}
-            />
-          ))}
+          .map(({ id, text, date }) => {
+            return (
+              <NoteButtonIntermediate
+                key={id}
+                id={id}
+                text={text}
+                date={date}
+                filter={filter}
+                activeNoteId={activeNoteId}
+                onNoteActivated={onNoteActivated}
+              />
+            );
+          })}
       </div>
 
       <div className="notes-list__controls">
