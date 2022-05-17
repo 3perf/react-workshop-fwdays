@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useTransition, startTransition, useEffect } from "react";
 import { Button, ButtonGroup } from "@mui/material";
 import FilterInput from "../FilterInput";
 import NoteButton from "../NoteButton";
 import "./index.css";
+
+// startTransition(() => {});
 
 function NotesList({
   notes,
@@ -11,14 +13,41 @@ function NotesList({
   onNewNotesRequested,
   onDeleteAllRequested,
 }) {
-  const [filter, setFilter] = useState("");
+  // This piece of state is important so is going to be updated immediately
+  const [a, setA] = useState("");
+  // This piece of state not that important so its updates can be rendered in background
+  const [b, setB] = useState("");
+  const [isTransitioning, startTransition] = useTransition();
+
+  // 1: spliting the state into important and not important
+  // 2: wrapping non-important state updates with startTransition
+
+  useEffect(() => {
+    console.log("A changed");
+  }, [a]);
+
+  useEffect(() => {
+    console.log("B changed");
+  }, [b]);
 
   return (
-    <div className="notes-list" style={{ position: "relative" }}>
+    <div
+      className="notes-list"
+      style={{ position: "relative", opacity: isTransitioning ? 0.5 : 1 }}
+    >
       <div className="notes-list__filter">
         <FilterInput
-          filter={filter}
-          onChange={setFilter}
+          filter={a}
+          onChange={(value) => {
+            setA(value);
+            // → immediately → renders the result immediately
+            startTransition(() => {
+              // console.log(value);
+              setB(value);
+              // → once important state updates are flushed
+              // → renders the result in background, yuielding to the browser every 5-10 ms or so
+            });
+          }}
           noteCount={Object.keys(notes).length}
         />
       </div>
@@ -27,11 +56,11 @@ function NotesList({
         {Object.values(notes)
           .sort((a, b) => b.date.getTime() - a.date.getTime())
           .filter(({ text }) => {
-            if (!filter) {
+            if (!b) {
               return true;
             }
 
-            return text.toLowerCase().includes(filter.toLowerCase());
+            return text.toLowerCase().includes(b.toLowerCase());
           })
           .map(({ id, text, date }) => (
             <NoteButton
@@ -40,7 +69,7 @@ function NotesList({
               id={id}
               onNoteActivated={onNoteActivated}
               text={text}
-              filterText={filter}
+              filterText={b}
               date={date}
             />
           ))}

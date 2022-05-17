@@ -26,7 +26,7 @@ export const useDynamicAppLayout = () => {
   );
   const currentPageId = useSelector(getCurrentPageId);
   const appMode = useSelector(getAppMode);
-  const canvasWidgets = useSelector(getWidgets);
+  const canvasWidgets = useSelector(getWidgets); // 2
   const appLayout = useSelector(getCurrentApplicationLayout);
   const dispatch = useDispatch();
 

@@ -2923,6 +2923,7 @@ __metadata:
     redux: ^4.1.2
     remark-gfm: ^3.0.1
     text-readability: ^1.0.5
+    use-context-selector: ^1.4.0
     vite: ^2.9.1
   languageName: unknown
   linkType: soft
@@ -3447,6 +3448,23 @@ __metadata:
     unist-util-is: ^5.0.0
     unist-util-visit-parents: ^5.0.0
   checksum: 3521abee2ed4535092aac073d05f46255475c89781b8e9d8c951a473d91b5d6e4d5912ae4a68a4c1cf17a42ed0108cb93103c7f5c736977529969997451363fb
+  languageName: node
+  linkType: hard
+
+"use-context-selector@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "use-context-selector@npm:1.4.0"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: "*"
+    react-native: "*"
+    scheduler: ">=0.19.0"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 4970ee82676418d751e9df0d3ecbf6be68abb3eb9496930f28d8749a8b9c652f31af7312d0d03533be979ad5ce79629bffcb82e54f8c03ca1efee899ffe545a1
   languageName: node
   linkType: hard
 

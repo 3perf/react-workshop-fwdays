@@ -53,7 +53,7 @@ const WidgetsEditor = () => {
   const params = useParams<{ applicationId: string; pageId: string }>();
   const dispatch = useDispatch();
 
-  const widgets = useSelector(getCanvasWidgetDsl);
+  const widgets = useSelector(getCanvasWidgetDsl); // 1
   const isFetchingPage = useSelector(getIsFetchingPage);
   const currentPageId = useSelector(getCurrentPageId);
   const currentPageName = useSelector(getCurrentPageName);
@@ -120,5 +120,7 @@ const WidgetsEditor = () => {
     </EditorContextProvider>
   );
 };
+
+WidgetsEditor.whyDidYouRender = true;
 
 export default WidgetsEditor;
