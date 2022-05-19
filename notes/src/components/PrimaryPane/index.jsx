@@ -8,29 +8,118 @@ import DarkModeSwitcher from "../DarkModeSwitcher";
 import ActiveAuthors from "../ActiveAuthors";
 import spinner from "./spinner.svg";
 import "./index.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  publishNote,
+  unpublishNote,
+} from "../../store/redux/noteMetadataReducer";
 
 const usePlainNoteEditor = false;
 
 function PrimaryPane({ activeNoteId, notes, saveNote }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isPublic, setIsPublic] = useState(false);
-  const [publishedAt, setPublishedAt] = useState(null);
+  const isLoading = useSelector((state) => state.noteMetadata.isUpdating);
+  const isPublic = useSelector(
+    (state) => state.noteMetadata.publicity[activeNoteId]
+  );
+  const publishedAt = useSelector(
+    (state) => state.noteMetadata.publishedDate[activeNoteId]
+  );
+  const dispatch = useDispatch();
 
-  const togglePublic = async () => {
-    setIsLoading(true);
-
+  const togglePublic = () => {
     if (isPublic) {
-      await fakeApi.setPublicStatus(false);
-      setIsPublic(false);
+      dispatch(unpublishNote(activeNoteId));
     } else {
-      await fakeApi.setPublicStatus(true);
-      const publishedDate = await fakeApi.getPublishedDate();
-      setIsPublic(true);
-      setPublishedAt(publishedDate.toLocaleTimeString());
+      dispatch(publishNote(activeNoteId));
     }
-
-    setIsLoading(false);
   };
+
+  // const togglePublic = () => {
+  //   setIsPublic(true);
+  //   setPublishedAt(new Date().toLocaleTimeString());
+
+  //   fakeApi.setPublicStatus(true).catch(() => {
+  //     setIsPublic(false);
+  //   });
+  //   // const publishedDate = await fakeApi.getPublishedDate();
+  // };
+
+  // const togglePublic = async () => {
+  //   setIsLoading(true);
+
+  //   if (isPublic) {
+  //     await fakeApi.setPublicStatus(false);
+  //     unstable_batchedUpdates(() => {
+  //       setIsPublic(false);
+  //       setIsLoading(false);
+  //     });
+  //   } else {
+  //     await fakeApi.setPublicStatus(true);
+  //     const publishedDate = await fakeApi.getPublishedDate();
+  //     unstable_batchedUpdates(() => {
+  //       setIsPublic(true);
+  //       setPublishedAt(publishedDate.toLocaleTimeString());
+  //       setIsLoading(false);
+  //     });
+  //   }
+  // };
+
+  // 1: useReducer
+  // 2: upgrade to React 18
+  // 3: React 0.14-17: unstable_batchedUpdates() (noop in React 18)
+
+  /*
+  clickEventListener = () => ...
+
+
+  // REACT 17:
+  batchUpdates = false
+  onClick = () => {
+    batchUpdates = true
+    clickEventListener()
+    batchUpdates = false
+    processUpdateQueue()
+  }
+
+  setState = (...) => {
+    updateQueue.push(...)
+    if (!batchUpdates) processUpdateQueue()
+  }
+
+  // REACT 18:
+  onClick = () => {
+    clickEventListener()
+  }
+
+  setState = (...) => {
+    if (!queueUpdateScheduled) {
+
+      Promise.resolve().then(
+        // MICROTASK:
+        () => {
+          processUpdateQueue()
+        }
+      )
+    }
+    updateQueue.push(...)
+  }
+  */
+
+  // settimeout
+  // settimeout
+  // click a button
+  // [processUpdateQueue()]
+
+  /*
+    setIsPublic(!isPublic);
+    // → 2
+    setPublishedAt(new Date().toISOString());
+    // → 3
+    // update batching → takes several state updates → batches them together
+    // react 17-: this works inside event listeners
+  */
+
+  // useReducer →
 
   if (!activeNoteId) {
     return (

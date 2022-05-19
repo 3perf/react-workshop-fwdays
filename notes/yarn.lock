@@ -1823,6 +1823,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-promise@npm:^2.1.0":
+  version: 2.2.2
+  resolution: "is-promise@npm:2.2.2"
+  checksum: 18bf7d1c59953e0ad82a1ed963fb3dc0d135c8f299a14f89a17af312fc918373136e56028e8831700e1933519630cc2fd4179a777030330fde20d34e96f40c78
+  languageName: node
+  linkType: hard
+
 "isexe@npm:^2.0.0":
   version: 2.0.0
   resolution: "isexe@npm:2.0.0"
@@ -1882,6 +1889,48 @@ __metadata:
   version: 1.2.4
   resolution: "lines-and-columns@npm:1.2.4"
   checksum: 0c37f9f7fa212b38912b7145e1cd16a5f3cd34d782441c3e6ca653485d326f58b3caccda66efce1c5812bde4961bbde3374fae4b0d11bf1226152337f3894aa5
+  languageName: node
+  linkType: hard
+
+"lodash._basefor@npm:^3.0.0":
+  version: 3.0.3
+  resolution: "lodash._basefor@npm:3.0.3"
+  checksum: 8028af9901a33c336eeb18945bfe304f9e2abc1a741f688a5e26e3fa1a1c975688f7a40ec90d8dc3eda3c04160ede0aa5a89c2beb04ac29daf914b5aeb8b6b5a
+  languageName: node
+  linkType: hard
+
+"lodash.isarguments@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "lodash.isarguments@npm:3.1.0"
+  checksum: ae1526f3eb5c61c77944b101b1f655f846ecbedcb9e6b073526eba6890dc0f13f09f72e11ffbf6540b602caee319af9ac363d6cdd6be41f4ee453436f04f13b5
+  languageName: node
+  linkType: hard
+
+"lodash.isarray@npm:^3.0.0":
+  version: 3.0.4
+  resolution: "lodash.isarray@npm:3.0.4"
+  checksum: 3b298fb76ff16981353f7d0695d8680be9451b74d2e76714ddbd903a90fbaa8e1d84979d0ae99325f5a9033776771154b19e05027ab23de83202251c8abe81b5
+  languageName: node
+  linkType: hard
+
+"lodash.isplainobject@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "lodash.isplainobject@npm:3.2.0"
+  dependencies:
+    lodash._basefor: ^3.0.0
+    lodash.isarguments: ^3.0.0
+    lodash.keysin: ^3.0.0
+  checksum: c49ee7642dea4427aeae37ad987fb43b574e15322c0cd5c8e9d6097099394dd68783948da646291e25471b7faa917ce8e18435403a6da89b1652520ea735d9c5
+  languageName: node
+  linkType: hard
+
+"lodash.keysin@npm:^3.0.0":
+  version: 3.0.8
+  resolution: "lodash.keysin@npm:3.0.8"
+  dependencies:
+    lodash.isarguments: ^3.0.0
+    lodash.isarray: ^3.0.0
+  checksum: 7d748df105266a474b6b3b17bef339f16c8625fb3091e3c6cad4a02ad943617c3fd5cb9036fed0dbd4a38e6d02e1f6d4a8cc5399f075d411f2a8f21b2eb8a8e4
   languageName: node
   linkType: hard
 
@@ -2921,6 +2970,7 @@ __metadata:
     react-markdown: ^7.1.1
     react-redux: ^8.0.0-beta
     redux: ^4.1.2
+    redux-batch: ^0.0.0
     remark-gfm: ^3.0.1
     text-readability: ^1.0.5
     vite: ^2.9.1
@@ -2944,6 +2994,25 @@ __metadata:
     string_decoder: ^1.1.1
     util-deprecate: ^1.0.1
   checksum: d4ea81502d3799439bb955a3a5d1d808592cf3133350ed352aeaa499647858b27b1c4013984900238b0873ec8d0d8defce72469fb7a83e61d53f5ad61cb80dc8
+  languageName: node
+  linkType: hard
+
+"redux-batch@npm:^0.0.0":
+  version: 0.0.0
+  resolution: "redux-batch@npm:0.0.0"
+  dependencies:
+    is-promise: ^2.1.0
+    redux-standard-action: 0.0.0
+  checksum: 728f79af65a4d8d622a02be2053878f3f64d49b6d1e163869e579036029156cf8a50fd2a2c2497fce40c33b7521a0320b03c93bc2c6daeb167c0347ed101bf30
+  languageName: node
+  linkType: hard
+
+"redux-standard-action@npm:0.0.0":
+  version: 0.0.0
+  resolution: "redux-standard-action@npm:0.0.0"
+  dependencies:
+    lodash.isplainobject: ^3.2.0
+  checksum: b5eca101b718cb2048f340838b7bc389c7b81405751c1c872859e81f93782438fe1a120816b663ba75a48ffbcf9e3c92994a6a110172be6fb056a4bacb496b28
   languageName: node
   linkType: hard
 

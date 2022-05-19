@@ -7,17 +7,49 @@ import "./index.css";
 function NoteButton({ isActive, id, onNoteActivated, text, filterText, date }) {
   const noteHeader = useRef();
 
-  useLayoutEffect(() => {
-    if (noteHeader.current) {
-      if (noteHeader.current.scrollWidth > noteHeader.current.clientWidth) {
-        noteHeader.current.classList.add("notes-list__note-header_overflowing");
-      } else {
-        noteHeader.current.classList.remove(
-          "notes-list__note-header_overflowing"
-        );
-      }
-    }
-  }, [text]);
+  // useLayoutEffect(() => {
+  //   if (noteHeader.current) {
+  //     const isOverflowing =
+  //       noteHeader.current.scrollWidth > noteHeader.current.clientWidth;
+  //     requestAnimationFrame(() => {
+  //       if (isOverflowing) {
+  //         noteHeader.current.classList.add(
+  //           "notes-list__note-header_overflowing"
+  //         );
+  //       } else {
+  //         noteHeader.current.classList.remove(
+  //           "notes-list__note-header_overflowing"
+  //         );
+  //       }
+  //     });
+  //   }
+  // }, [text]);
+
+  // requestAnimationFrame(() => {
+  //   // run this code in the end of the current frame
+  // });
+
+  // reading → writing → reading → writing → reading → writing → ...
+  // ↓
+  // reading [×100] → writing [×100]
+
+  // 1: use canonical React (setState vs classList.add)
+  // const [isOverflowing, setIsOverflowing] = useState(false);
+  // useLayoutEffect(
+  //   function myLayoutEffect() {
+  //     if (noteHeader.current) {
+  //       if (noteHeader.current.scrollWidth > noteHeader.current.clientWidth) {
+  //         setIsOverflowing(true);
+  //       } else {
+  //         setIsOverflowing(false);
+  //       }
+  //     }
+  //   },
+  //   [text]
+  // );
+  // 2: requestAnimationFrame
+  // 3: IntersectionObserver / ResizeObserver
+  // 4: cloning?
 
   const className = [
     "notes-list__button",
