@@ -172,6 +172,7 @@ export const darkenActive = (color: Color) => {
   return darken(color, 16);
 };
 
+// Optimization: precompute colors ahead of time
 const getButtonHoverAndActiveStyles = (color: Color, filled = true) => {
   return css`
     background: ${color};

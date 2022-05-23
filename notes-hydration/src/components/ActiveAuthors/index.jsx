@@ -1,6 +1,8 @@
 import { Avatar, AvatarGroup } from "@mui/material";
-import { memo } from "react";
+import React, { memo } from "react";
 import { useSelector } from "react-redux";
+
+// const Avatar = React.lazy(() => import("@mui/material/Avatar"));
 
 function ActiveAuthors() {
   const activeThisMonth = useSelector((state) =>
@@ -23,3 +25,6 @@ function ActiveAuthors() {
 }
 
 export default memo(ActiveAuthors);
+
+// process.env.NODE_ENV
+// → "development" → React in dev mode → styled-components

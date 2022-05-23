@@ -1,5 +1,4 @@
 import { Variant } from "components/ads/common";
-import { Toaster } from "components/ads/Toast";
 import {
   LOCAL_STORAGE_QUOTA_EXCEEDED_MESSAGE,
   LOCAL_STORAGE_NO_SPACE_LEFT_ON_DEVICE_MESSAGE,
@@ -9,7 +8,7 @@ import {
 const getLocalStorage = () => {
   const storage = window.localStorage;
 
-  const handleError = (e: Error) => {
+  const handleError = async (e: Error) => {
     let message;
     if (e.name === "QuotaExceededError") {
       message = LOCAL_STORAGE_QUOTA_EXCEEDED_MESSAGE;
@@ -18,6 +17,10 @@ const getLocalStorage = () => {
     }
 
     if (message) {
+      const { Toaster } = await import(
+        /* webpackPrefetch: true */ "components/ads/Toast"
+      );
+
       Toaster.show({
         text: createMessage(message),
         variant: Variant.danger,

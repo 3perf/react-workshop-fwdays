@@ -132,6 +132,11 @@ module.exports = function(webpackEnv) {
       publicPath: paths.publicUrlOrPath,
     },
     optimization: {
+      // optimization.minimize: false
+      minimize: false,
+      // optimization.moduleIds: "named"
+      moduleIds: "named",
+
       minimizer: [
         // This is only used in production mode
         new TerserPlugin({
@@ -218,11 +223,8 @@ module.exports = function(webpackEnv) {
         .map((ext) => `.${ext}`)
         .filter((ext) => useTypeScript || !ext.includes("ts")),
       alias: {
-        // Allows for better profiling with ReactDevTools
-        ...(isEnvProductionProfile && {
-          "react-dom$": "react-dom/profiling",
-          "scheduler/tracing": "scheduler/tracing-profiling",
-        }),
+        "react-dom": "react-dom/profiling",
+        "schedule/tracing": "schedule/tracing-profiling",
         // Track react-redux’s useSelector
         // See https://github.com/welldone-software/why-did-you-render#custom-hooks
         // and https://github.com/welldone-software/why-did-you-render/issues/85
